@@ -1,0 +1,4 @@
+run this for custom keyboard layout
+
+sudo ln -s ~/dotfiles/xkb/custom /usr/share/X11/xkb/symbols/custom
+
