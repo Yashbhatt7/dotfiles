@@ -1,0 +1,9 @@
+# Source Omarchy application bindings
+source = ~/.local/share/omarchy/config/hypr/bindings.conf
+
+# Direct brightness and volume controls
+# binde = , XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%
+# binde = , XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%
+# bind = , XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle
+# binde = , XF86MonBrightnessUp, exec, brightnessctl set +5%
+# binde = , XF86MonBrightnessDown, exec, brightnessctl set 5%-
