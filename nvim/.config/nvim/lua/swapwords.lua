@@ -1,0 +1,85 @@
+-- ~/.config/nvim/lua/swapwords.lua
+
+-- local M = {}
+--
+-- -- Helper: get current cursor word boundaries
+-- local function get_word_bounds()
+--     local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+--     local line = vim.api.nvim_get_current_line()
+--
+--     -- Find start of current word
+--     local s = col
+--     while s > 0 and line:sub(s, s):match("[%w_]") do
+--         s = s - 1
+--     end
+--
+--     -- Find end of current word
+--     local e = col + 1
+--     while e <= #line and line:sub(e, e):match("[%w_]") do
+--         e = e + 1
+--     end
+--
+--     return s + 1, e - 1
+-- end
+--
+-- -- Swap with next word
+-- function M.swap_next()
+--     local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+--     local line = vim.api.nvim_get_current_line()
+--
+--     local s1, e1 = get_word_bounds()
+--     local word1 = line:sub(s1, e1)
+--
+--     -- find next word after e1
+--     local s2, e2 = line:find("%w+", e1 + 1)
+--     if not s2 then return end
+--
+--     local word2 = line:sub(s2, e2)
+--
+--     -- build new line
+--     local new_line = line:sub(1, s1 - 1) .. word2 ..
+--     line:sub(e1 + 1, s2 - 1) .. word1 .. line:sub(e2 + 1)
+--
+--     vim.api.nvim_set_current_line(new_line)
+-- end
+--
+-- -- Swap with previous word
+-- function M.swap_prev()
+--     local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+--     local line = vim.api.nvim_get_current_line()
+--
+--     -- find word under cursor
+--     local s1, e1 = get_word_bounds()
+--     local word1 = line:sub(s1, e1)
+--
+--     -- scan left from s1-1 to find previous word
+--     local p_end = s1 - 2
+--     if p_end < 1 then return end
+--
+--     while p_end > 0 and not line:sub(p_end, p_end):match("[%w_]") do
+--         p_end = p_end - 1
+--     end
+--
+--     if p_end < 1 then return end
+--
+--     local p_start = p_end
+--     while p_start > 0 and line:sub(p_start, p_start):match("[%w_]") do
+--         p_start = p_start - 1
+--     end
+--
+--     p_start = p_start + 1
+--
+--     local word2 = line:sub(p_start, p_end)
+--
+--     -- rebuild line with swapped words
+--     local new_line = line:sub(1, p_start-1)
+--     .. word1
+--     .. line:sub(p_end+1, s1-1)
+--     .. word2
+--     .. line:sub(e1+1)
+--
+--     vim.api.nvim_set_current_line(new_line)
+-- end
+--
+-- return M
+--

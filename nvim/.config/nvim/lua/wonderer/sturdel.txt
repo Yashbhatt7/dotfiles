@@ -1,0 +1,27 @@
+local curl = require("plenary.curl")
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.tidal",
+  callback = function()
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local body = table.concat(lines, "\n")
+
+    local ok = pcall(function()
+      curl.post("http://localhost:3000/update", {
+        body = body,
+        headers = {
+          ["Content-Type"] = "text/plain"
+        },
+        callback = function()
+          print("✅ Sent to Strudel!")
+        end
+      })
+    end)
+
+    if not ok then
+      print("❌ Failed to send code to Strudel server")
+    end
+  end,
+})
+
+

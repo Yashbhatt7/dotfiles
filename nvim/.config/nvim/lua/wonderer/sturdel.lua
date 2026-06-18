@@ -1,0 +1,73 @@
+-- -- ~/.config/nvim/lua/sturdel.lua
+-- -- Add this to your Neovim configuration
+--
+-- local curl = require('plenary.curl')
+--
+-- local M = {}
+--
+-- -- Function to send current buffer to Sturdel
+-- function M.update_sturdel()
+--     -- Get all lines from current buffer
+--     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--     local content = table.concat(lines, "\n")
+--
+--     -- Show a message that we're updating
+--     print("Updating Sturdel...")
+--
+--     -- Send to server
+--     curl.post("http://localhost:3000/update", {
+--         body = content,
+--         headers = {
+--             ["Content-Type"] = "text/plain",
+--         },
+--         timeout = 5000,
+--         callback = function(response)
+--             if response.status == 200 then
+--                 print("✅ Sturdel updated successfully!")
+--             else
+--                 print("❌ Failed to update Sturdel: " .. (response.body or "Unknown error"))
+--             end
+--         end,
+--         on_error = function(error)
+--             print("❌ Error connecting to server: " .. tostring(error))
+--             print("Make sure the server is running: bun run src/server.ts")
+--         end
+--     })
+-- end
+--
+-- -- Function to check server health
+-- function M.check_server()
+--     curl.get("http://localhost:3000/health", {
+--         timeout = 3000,
+--         callback = function(response)
+--             if response.status == 200 then
+--                 print("✅ Server is running")
+--             else
+--                 print("❌ Server health check failed")
+--             end
+--         end,
+--         on_error = function(error)
+--             print("❌ Server is not running. Start it with: bun run src/server.ts")
+--         end
+--     })
+-- end
+--
+-- -- Auto-update on save (optional)
+-- function M.setup_auto_update()
+--     vim.api.nvim_create_autocmd("BufWritePost", {
+--         pattern = {"*.js", "*.ts", "*.jsx", "*.tsx", "*.html", "*.css", "*.py", "*.lua"}, -- Add your file types
+--         callback = function()
+--             M.update_sturdel()
+--         end,
+--     })
+--     print("Auto-update on save enabled for code files")
+-- end
+--
+-- -- Create user commands
+-- vim.api.nvim_create_user_command('SturdeLUpdate', M.update_sturdel, {})
+-- vim.api.nvim_create_user_command('SturdeLCheck', M.check_server, {})
+-- vim.api.nvim_create_user_command('SturdeLAutoUpdate', M.setup_auto_update, {})
+--
+-- return M
+--
+--
