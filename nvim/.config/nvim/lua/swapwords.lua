@@ -1,5 +1,5 @@
--- ~/.config/nvim/lua/swapwords.lua
-
+-- -- ~/.config/nvim/lua/swapwords.lua
+--
 -- local M = {}
 --
 -- -- Helper: get current cursor word boundaries

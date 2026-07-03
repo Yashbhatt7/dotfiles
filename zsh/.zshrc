@@ -275,3 +275,6 @@ export PATH="$HOME/aseprite/build/bin:$PATH"
 
 # NPM global bin (added by Qwen Code installer)
 export PATH="$HOME/.npm-global/bin:$PATH"
+
+export EMSDK_QUIET=1
+source "/home/traveller/emsdk/emsdk_env.sh"
